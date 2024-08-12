@@ -1,7 +1,27 @@
+require('dotenv').config()
+const { networkInterfaces } = require('os');
+
+const getContainerIpAddress = () => {
+    const nets = networkInterfaces();
+    let containerIp = 'localhost';
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            if (net.family === 'IPv4' && !net.internal) {
+                containerIp = net.address;
+                break;
+            }
+        }
+    }
+    return containerIp;
+};
+const host = getContainerIpAddress();
+const port = process.env.PORT || 443;
+console.log(process.env.PORT)
+
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-require('dotenv').config()
+
 const path = require("path")
 
 const mongoose = require("mongoose");
@@ -12,8 +32,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 
 // enable static path
 app.use('/uploads' , express.static(path.join(__dirname, "uploads")))
-
-require('dotenv').config()
 
 
 // Middleware for parsing request body
@@ -37,6 +55,10 @@ app.use('/',g_routes)
 app.use('/',c_routes)
 app.use('/',content_routes)
 
-app.listen(3000, () => {
-    console.log(`Server listening on http://localhost:${process.env.port}`);
+app.listen(port , async () => {
+    try {
+        console.log(`Server is Running And DB Connected https://${host}:${port}`);
+    } catch (error) {
+        console.log(error);
+    }
 });

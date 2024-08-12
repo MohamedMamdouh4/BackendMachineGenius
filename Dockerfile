@@ -17,4 +17,4 @@ RUN npm ci
 COPY . .
 RUN mkdir -p /usr/src/app/DataBase
 
-CMD [ "node", "main.js" ]
+CMD [ "node", "main.js" ]           
