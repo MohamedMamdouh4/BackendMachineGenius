@@ -16,7 +16,6 @@ const getContainerIpAddress = () => {
 };
 const host = getContainerIpAddress();
 const port = process.env.PORT || 443;
-console.log(process.env.PORT)
 
 const express = require('express');
 const app = express();
