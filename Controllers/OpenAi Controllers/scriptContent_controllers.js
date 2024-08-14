@@ -55,22 +55,22 @@ const generateContent = async (req, res) => {
     let prompt = "";
     if (brandName == "StreetPolitics") {
       prompt = `Write a Canada-based political Article in the third person point of view. It needs to be at least 1700 words that are as human as possible. We have a right-leaning perspective, especially when discussing criticism of Pierre Poilievre or the Liberals. Keep the tone professional yet engaging. We stand with Pierre Poilievre and are against Justin Trudeau. The article will need to be divided into three sections.
-                        1. Intro:-
-                        - Needs to begin with a hooking statement about attention-grabbing news. It needs to be something unique and viral.
-                        - Don’t reveal all the details of the news in this section. Give an introduction of the topic, but don’t be too vague.
-                        - Keep the word limit for this section to 200 words.
-                        2. Body:
-                        - Keep it in third person point of view.
-                        - Keep it engaging by throwing in a couple of sarcastic jokes about the Liberals and Justin Trudeau.
-                        - Weave in conspiracy theories related to the topic being discussed.
-                        - Maintain a conversational style, as if entertaining another human with the latest news while keeping a serious undertone.
-                        - Pick the common topics between the chosen articles to flow from one point to another seamlessly.
-                        - Use simpler, commonly used terms.
-                        3. Outro:
-                        - Make it conversational, yet professional.
-                        - Make the conclusion wrap up all the main ideas from the article and give it a conservative spin
-                        - Don't sound repetitive.
-                        - Ask about the reader's opinions in an engaging manner, wrapping up the video.`;
+                        1.Intro:-
+                          - Needs to begin with a hooking statement about attention-grabbing news. It needs to be something unique and viral.
+                          - Don’t reveal all the details of the news in this section. Give an introduction of the topic.
+                          - Keep the word limit for this section to 200 words.
+                        2.Body:
+                          - Keep it in third person point of view.
+                          - Keep it engaging by throwing in a couple of sarcastic jokes about the Liberals and Justin Trudeau.
+                          - Weave in conspiracy theories related to the topic being discussed.
+                          - Maintain a conversational style, as if entertaining another human with the latest news while keeping a serious undertone.
+                          - Pick the common topics between the chosen articles to flow from one point to another seamlessly.
+                          - Use simpler, commonly used terms.
+                        3.Outro:
+                          - Make it conversational, yet professional.
+                          - Make the conclusion wrap up all the main ideas from the article and give it a conservative spin
+                          -Don't sound repetitive.
+                          -Ask about the reader's opinions in an engaging manner, wrapping up the video.`;
     } else if (brandName == "Investocracy") {
       prompt = `Write a stock-market-centered article that is at least 2500 words, using a tone that is human, engaging, professional, and direct. The article needs to be written from a third point of view. Maintain a professional, direct tone. it needs to be divided into three parts.
                         1. Intro:

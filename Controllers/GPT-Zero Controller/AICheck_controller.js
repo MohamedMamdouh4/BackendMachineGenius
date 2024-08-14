@@ -46,7 +46,7 @@ const checkAi = async (req, res) => {
 
         try {
             const result = await detectText(document);
-            res.json(result); // Returning the API response directly
+            res.json(result); 
         } catch (error) {
             console.error('Error checking AI:', error);
             res.status(500).json({ success: false, error: 'Error checking AI' });

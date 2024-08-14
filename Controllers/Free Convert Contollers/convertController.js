@@ -87,7 +87,7 @@ const convertor = async (req, res) => {
       .then(() => {
         res.status(200).send({
           message: 'Files uploaded, converted, and saved successfully',
-          movie_url: 'https://52.55.179.234:433/uploads/movie.mp4',
+          movie_url: 'http://34.206.30.166:443/uploads/movie.mp4',
           transcriptionResults,
         });
       })
