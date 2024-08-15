@@ -1,6 +1,10 @@
+const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const content_dataBase = require("../../Models/Content/content_model");
+const verifyToken = require('../../Middlewares/verify_token')
 const mongoose = require("mongoose");
+const secretKey = process.env.JWT_SECRET;
+
 
 const get_all_content = async (req , res) => {
     const querying = req.query
@@ -15,14 +19,18 @@ const get_all_content = async (req , res) => {
         const content = await content_dataBase.find({},{"__v" : false}).limit(LIMIT).skip(SKIP);;
         res.json(content);
     }
-    catch(err)
+    catch(error)
     {
         res.status(500).json({ error: error.message });
     }
 }
 
 const add_new_content = async (req, res) => {
-    const { user_id, content_title, content, brand, content_type, views, date, approvals, movie, SEO } = req.body;
+    const {content_title, content, brand, content_type, views, date, approvals, movie, SEO } = req.body;
+
+    const decodedToken = JSON.parse(verifyToken.decodeToken(req, res));
+    const user_id = decodedToken._id;
+    console.log("userID" , user_id);
     
     try {
         if (!mongoose.connection.readyState) {
@@ -42,6 +50,7 @@ const add_new_content = async (req, res) => {
             return res.status(400).json({ message: "Content already exists" });
         }
 
+       
         const new_content = new content_dataBase({
             user_id,
             content_title,

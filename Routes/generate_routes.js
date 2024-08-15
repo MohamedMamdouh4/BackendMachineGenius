@@ -51,7 +51,9 @@ router.post('/script/finalize-content', finalizeScriptContent.generateContent);
 router.post('/article/finalize-content', finalizeArticleContent.generateContent);
 router.get('/get-temp', finalizeScriptContent.get_all_temp);
 //////////
-router.post('/generate-titles', generateTitles.generateContent);
+router.post('/generate-titles', generateTitles.generateContentTitles);
+//////////
+router.post('/generate-thumbnails', generateTitles.generateContentThumbnails);
 //////////
 router.post('/transcript-audio', upload.single("file") , transcriptAudio.convertor);
 

@@ -26,4 +26,30 @@ const verifyToken = (req , res , next) =>
     }    
 }
 
+const decodeToken = (req , res)  =>
+{
+    
+    const authHeader = req.header('Authorization') || req.header('authorization')
+    if (!authHeader)
+    {
+        return res.status(401).json({ message : "Token is req."})
+    }
+
+    const token = authHeader.split(' ')[1]    
+    try
+    {
+        const currentUser = jwt.verify(token , secretKey)
+        req.currentUser = currentUser
+        return (JSON.stringify(currentUser))
+    }
+    catch(err)
+    {
+        console.log(err);        
+        res.status(401).json({ message: "Invalid Token" })
+    }    
+} 
+
 module.exports = { verifyToken };
+module.exports = {
+    decodeToken
+}

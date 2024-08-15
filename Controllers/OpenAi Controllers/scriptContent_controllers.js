@@ -53,7 +53,7 @@ const generateContent = async (req, res) => {
     }
 
     let prompt = "";
-    if (brandName == "StreetPolitics") {
+    if (brandName == "streetPoliticsCanada") {
       prompt = `Write a Canada-based political Article in the third person point of view. It needs to be at least 1700 words that are as human as possible. We have a right-leaning perspective, especially when discussing criticism of Pierre Poilievre or the Liberals. Keep the tone professional yet engaging. We stand with Pierre Poilievre and are against Justin Trudeau. The article will need to be divided into three sections.
                         1.Intro:-
                           - Needs to begin with a hooking statement about attention-grabbing news. It needs to be something unique and viral.
@@ -69,9 +69,9 @@ const generateContent = async (req, res) => {
                         3.Outro:
                           - Make it conversational, yet professional.
                           - Make the conclusion wrap up all the main ideas from the article and give it a conservative spin
-                          -Don't sound repetitive.
-                          -Ask about the reader's opinions in an engaging manner, wrapping up the video.`;
-    } else if (brandName == "Investocracy") {
+                          - Don't sound repetitive.
+                          - Ask about the reader's opinions in an engaging manner, wrapping up the video.`;
+    } else if (brandName == "investocracy") {
       prompt = `Write a stock-market-centered article that is at least 2500 words, using a tone that is human, engaging, professional, and direct. The article needs to be written from a third point of view. Maintain a professional, direct tone. it needs to be divided into three parts.
                         1. Intro:
                         - Needs to begin with a hooking statement about attention-grabbing news. It needs to be something unique and viral in the stock market.
@@ -91,9 +91,15 @@ const generateContent = async (req, res) => {
                         - Highlight the current position of the stock that we talk about.
                         - End the article with an engaging statement to ask about the reader’s opinions about the topic.
                         - Maintain a professional, yet conversational manner`;
-    } else if (brandName == "Moviemyth") {
+    } else if (brandName == "movieMyth") {
       prompt = `write a movie recap of from this content
                 write it in detail, giving me a scence by scene explation of the movie`;
+    }
+    else
+    {
+        return res
+        .status(404)
+        .json({ success: false, error: "brandName Not correct" });
     }
     const finalArticles = [];
     try {
