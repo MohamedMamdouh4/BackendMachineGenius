@@ -56,7 +56,7 @@ app.use('/',content_routes)
 
 app.listen(port , async () => {
     try {
-        console.log(`Server is Running And DB Connected https://${host}:${port}`);
+        console.log(`Server is Running And DB Connected http://${host}:${port}`);
     } catch (error) {
         console.log(error);
     }

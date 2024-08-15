@@ -9,26 +9,26 @@ const scrapeConrollersMYTH = require('../Controllers/Scraping Controllers/scrape
 
 // router.get('/cbc/scrapeall', scrapeConrollersSTP.cbcScrapeAll);
 // router.get('/thestar/scrapeall', scrapeConrollersSTP.thestarScrapeAll);
-router.get('/collect/STP', scrapeConrollersSTP.Collect);
+router.get('/collect/streetPoliticsCanada', scrapeConrollersSTP.Collect);
 
 //////////////
-router.get('/collect/INV/NVDA' , scrapeConrollersINV.CollectNvda)
-router.get('/collect/INV/AAPL' , scrapeConrollersINV.CollectApple)
-router.get('/collect/INV/AMD'  , scrapeConrollersINV.CollectAmd)
-router.get('/collect/INV/AMZN'  , scrapeConrollersINV.CollectAmzn)
-router.get('/collect/INV/PLTR'  , scrapeConrollersINV.CollectPltr)
-router.get('/collect/INV/TSLA'  , scrapeConrollersINV.CollectTsla)
+router.get('/collect/investocracy/NVDA' , scrapeConrollersINV.CollectNvda)
+router.get('/collect/investocracy/AAPL' , scrapeConrollersINV.CollectApple)
+router.get('/collect/investocracy/AMD'  , scrapeConrollersINV.CollectAmd)
+router.get('/collect/investocracy/AMZN'  , scrapeConrollersINV.CollectAmzn)
+router.get('/collect/investocracy/PLTR'  , scrapeConrollersINV.CollectPltr)
+router.get('/collect/investocracy/TSLA'  , scrapeConrollersINV.CollectTsla)
 //////////////
 
 /////////////
 router.get('/collect/twitter/NVDA' , scrapeConrollersINV.CollectTwitter)
 router.get('/collect/twitter/PLTR' , scrapeConrollersINV.CollectTwitter)
 ////////////
-router.get('/collectFool/INV', scrapeConrollersINV.CollectFool);
+router.get('/collectFool/investocracy', scrapeConrollersINV.CollectFool);
 
 /////////////
 
-router.get('/collectInvesting/INV', scrapeConrollersINV.CollectInvesting);
+router.get('/collectInvesting/investocracy', scrapeConrollersINV.CollectInvesting);
 
 ////////------Myth---------///////////
 router.get('/collect/MYTH', scrapeConrollersMYTH.Collect);
