@@ -1,9 +1,8 @@
-const jwt = require('jsonwebtoken');
 require('dotenv').config()
 const content_dataBase = require("../../Models/Content/content_model");
 const verifyToken = require('../../Middlewares/verify_token')
 const mongoose = require("mongoose");
-const secretKey = process.env.JWT_SECRET;
+
 
 
 const get_all_content = async (req , res) => {
@@ -26,10 +25,13 @@ const get_all_content = async (req , res) => {
 }
 
 const add_new_content = async (req, res) => {
-    const {content_title, content, brand, content_type, views, date, approvals, movie, SEO } = req.body;
+    const {content_title, content, brand, content_type, views, date , approvals , movie , SEO } = req.body;
 
     const decodedToken = JSON.parse(verifyToken.decodeToken(req, res));
+    console.log(decodedToken);
+    
     const user_id = decodedToken._id;
+    const user_name =  decodedToken.email
     console.log("userID" , user_id);
     
     try {
@@ -53,6 +55,7 @@ const add_new_content = async (req, res) => {
        
         const new_content = new content_dataBase({
             user_id,
+            user_name,
             content_title,
             content,
             brand,
@@ -65,7 +68,7 @@ const add_new_content = async (req, res) => {
         });
 
         await new_content.save();
-        return res.status(201).json(new_content);
+        return res.status(201).json({ message: "successfully" , new_content });
 
     } catch (error) {
         console.error("Error occurred:", error);

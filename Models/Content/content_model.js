@@ -10,6 +10,12 @@ const contentSchema = new Schema({
     unique: false,
     required: true, 
   },
+  user_name:
+  {
+    type: String,
+    unique: false,
+    required: true, 
+  },
   content_title: 
   {
     type: String,

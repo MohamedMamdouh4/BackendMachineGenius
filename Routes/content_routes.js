@@ -9,7 +9,7 @@ const contentControllers = require('../Controllers/Content Controller/content_co
 
 router.get('/content', contentControllers.get_all_content);
 
-router.post('/content', contentControllers.add_new_content);
+router.post('/content' , contentControllers.add_new_content);
 
 router.patch('/content/:id', contentControllers.update_content);
 

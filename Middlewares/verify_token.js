@@ -16,7 +16,7 @@ const verifyToken = (req , res , next) =>
     {
         const currentUser = jwt.verify(token , secretKey)
         req.currentUser = currentUser
-        console.log("Decoded Token :- " + JSON.stringify(currentUser))
+        // console.log("Decoded Token :- " + JSON.stringify(currentUser))
         next();
     }
     catch(err)
@@ -28,7 +28,6 @@ const verifyToken = (req , res , next) =>
 
 const decodeToken = (req , res)  =>
 {
-    
     const authHeader = req.header('Authorization') || req.header('authorization')
     if (!authHeader)
     {
@@ -49,7 +48,7 @@ const decodeToken = (req , res)  =>
     }    
 } 
 
-module.exports = { verifyToken };
-module.exports = {
+module.exports = { 
+    verifyToken,
     decodeToken
-}
+ };
