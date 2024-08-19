@@ -6,21 +6,9 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
-const generateTitles = async (articles) => {
+const generateTitles = async (content , myPrompt) => {
     try {
-        const prompt = `
-            You are given a content. Your task is Create at least 10  hooking titles with a maximum of eight words for the topic selected. Make it provocative and engaging, and include clickbait..
-            
-            Here are the Content:
-            
-            ${articles}
-            
-            Return the result in the following format:
-            
-            1. General Title: [General title here]
-            
-            2. General Title: [General title here]
-        `;
+        const prompt = `${myPrompt} Here's the content: \n\n${content}`;
 
         // Send the prompt to OpenAI
         const completion = await openai.chat.completions.create({
@@ -96,9 +84,53 @@ const generateThumbnails = async (content , myPrompt) => {
 
 const generateContentTitles = async (req, res) => {
     try {
-        const  content  = req.body.content;
-        const generatedTitles = await generateTitles(content);
-        res.json({ success: true, generatedTitles });
+        const { content, brandName } = req.body;
+        if (!content || !brandName) {
+          return res
+            .status(400)
+            .json({ success: false, error: "No content or brand name provided" });
+        }
+        let prompt = "";
+        if (brandName === "streetPoliticsCanada") 
+        {
+            prompt = `write atleast 10 clickbaity youtube video titles for the script, make it 5 to 7 words, with excitement and urgency
+
+            1. General Title: [video titles here]
+            
+            2. General Title: [video titles here]
+            and so on ......`;
+        } 
+        else if 
+        (brandName == "investocracy") 
+        {
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it ecstatic and positive , 
+            and include clickbait context.
+            Return the result in the following format:
+            
+            1. General Title: [hooking titles here]
+            
+            2. General Title: [hooking titles here]
+            and so on ......`;
+        }
+        else if 
+        (brandName == "movieMyth") 
+        {
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected.
+            Make it thrilling yet mysterious and suspenseful, and include clickbait context..
+            Return the result in the following format:
+            
+            1. General Title: [General title here]
+            
+            2. General Title: [General title here]`;
+        }
+        else
+        {
+            return res
+            .status(404)
+            .json({ success: false, error: "brandName Not correct" });
+        }
+        const generatedTitles= await generateTitles(content , prompt);
+        res.json({ success: true, Titles: generatedTitles });
     } catch (error) {
         res.status(500).json({ success: false, error: error.message });
     }
