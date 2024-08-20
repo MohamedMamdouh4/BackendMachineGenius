@@ -93,35 +93,32 @@ const generateContentTitles = async (req, res) => {
         let prompt = "";
         if (brandName === "streetPoliticsCanada") 
         {
-            prompt = `write atleast 10 clickbaity youtube video titles for the script, make it 5 to 7 words, with excitement and urgency
-
-            1. General Title: [video titles here]
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it provocative and aggressive, and include clickbait context.
+            1. General Title: [hooking title here]
             
-            2. General Title: [video titles here]
+            2. General Title: [hooking title here]
             and so on ......`;
         } 
         else if 
         (brandName == "investocracy") 
         {
-            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it ecstatic and positive , 
-            and include clickbait context.
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it ecstatic and positive , and include clickbait context...
             Return the result in the following format:
             
-            1. General Title: [hooking titles here]
+            1. General Title: [hooking title here]
             
-            2. General Title: [hooking titles here]
+            2. General Title: [hooking title here]
             and so on ......`;
         }
         else if 
         (brandName == "movieMyth") 
         {
-            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected.
-            Make it thrilling yet mysterious and suspenseful, and include clickbait context..
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it thrilling yet mysterious and suspenseful, and include clickbait context...
             Return the result in the following format:
             
-            1. General Title: [General title here]
+            1. General Title: [hooking title here]
             
-            2. General Title: [General title here]`;
+            2. General Title: [hooking title here]`;
         }
         else
         {
