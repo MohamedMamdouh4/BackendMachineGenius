@@ -144,7 +144,9 @@ const generateContentThumbnails = async (req, res) => {
         let prompt = "";
         if (brandName === "streetPoliticsCanada") 
         {
-            prompt = `Create a hooking title with a maximum of five words for the topic selected. Start with a grasping exclamation of one adjective. Make it clickbait and provocative, Creating atleast 10 Thumbnails
+            prompt = `Create a hooking title with a maximum of five words for the topic selected. Start with a grasping exclamation of one adjective. Make it in a clickbait and provocative context.
+            , Creating atleast 10 Thumbnails
+
             Return the result in the following format:
             
             1. Thumbnail: [hooking title here]
@@ -155,8 +157,11 @@ const generateContentThumbnails = async (req, res) => {
         else if 
         (brandName == "investocracy") 
         {
-            prompt = `Create a hooking title for the topic selected, with a word count of three to five words. Include Clickbait , Creating atleast 10.
-              
+            prompt = `Create 10 hooking thumbnail texts for the topic selected, with a word count of three to four words. Include clickbait context, be mysterious, suspenseful, do not reveal any details from the article, only the name of a stock or an investor, use positive language, and use CALL TO ACTION keywords if applicable.
+            Keywords to include : "buy now, time to sell, about to explode, exploding, explosion, impossible, insane, madness, do this or lose, doomed, nothing can stop, changes everything.
+            
+            Return the result in the following format:
+            
             1. Thumbnail: [hooking title here]
             
             2. Thumbnail: [hooking title here]
