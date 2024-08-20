@@ -44,14 +44,10 @@ app.use(cors());
 
 
 // import routes file
-const S_routes = require('./Routes/scrape_routes')
 const g_routes = require('./Routes/generate_routes')
-const c_routes = require('./Routes/checks_routes')
 const content_routes = require('./Routes/content_routes')
 
-app.use('/',S_routes)
 app.use('/',g_routes)
-app.use('/',c_routes)
 app.use('/',content_routes)
 
 app.listen(port , async () => {

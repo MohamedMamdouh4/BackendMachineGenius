@@ -93,7 +93,7 @@ const generateContentTitles = async (req, res) => {
         let prompt = "";
         if (brandName === "streetPoliticsCanada") 
         {
-            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it provocative and aggressive, and include clickbait context.
+            prompt = `You are given content. Your task is Create at least 10 hooking titles with a maximum of eight words for the topic selected. Make it provocative and aggressive, and include clickbait context...
             Return the result in the following format:
             1. General Title: [hooking title here]
             
