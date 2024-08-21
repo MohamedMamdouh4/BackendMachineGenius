@@ -1,3 +1,7 @@
+require('dotenv').config()
+const mongoose = require("mongoose");
+const scraped_dataBase = require("../../Models/Scraped/scraped_model");
+
 const OpenAI = require('openai');
 require('dotenv').config();
 const axios = require('axios');
@@ -79,6 +83,31 @@ const generateTitleAndArticles = async (articles) => {
     }
 };
 
+
+
+const get_scraped_fromDB = async (brandName, stockName) => {
+    try {
+        if (!mongoose.connection.readyState) {
+            await mongoose.connect(process.env.MONGO_URL, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true,
+            });
+        }
+
+        const query = { brand: brandName };
+        if (stockName) {
+            query.stock = stockName;
+        }
+
+        const results = await scraped_dataBase.find(query);
+
+        return results;
+    } catch (error) {
+        console.error("Error occurred:", error);
+        throw new Error("Internal Server Error");
+    }
+};
+
 const generateContent = async (req, res) => {
     try {
         const brandName = req.body.brandName;
@@ -88,22 +117,13 @@ const generateContent = async (req, res) => {
             return res.status(400).json({ success: false, error: 'No brand Name provided' });
         }
 
-        let scrapeResponse;
+        const scrapeResponse = await get_scraped_fromDB(brandName, stockName);
 
-        if (stockName) {
-            scrapeResponse = await axios.get(`http://localhost:${process.env.PORT}/collect/${brandName}/${stockName}`);
-        } else {
-            scrapeResponse = await axios.get(`http://localhost:${process.env.PORT}/collect/${brandName}`);
+        if (!scrapeResponse || scrapeResponse.length === 0) {
+            return res.status(404).json({ success: false, error: 'No content found for the given brand and stock' });
         }
 
-        const scrapeData = scrapeResponse.data;
-
-        if (!scrapeData.success) {
-            return res.status(500).json({ success: false, error: 'Error fetching scraped content' });
-        }
-
-        const allArticles = scrapeData.allArticles;
-        const organizedArticles = await generateTitleAndArticles(allArticles);
+        const organizedArticles = await generateTitleAndArticles(scrapeResponse);
 
         res.json({ success: true, organizedArticles });
     } catch (error) {
@@ -111,6 +131,7 @@ const generateContent = async (req, res) => {
         res.status(500).json({ success: false, error: error.message });
     }
 };
+
 
 module.exports = {
     generateContent
