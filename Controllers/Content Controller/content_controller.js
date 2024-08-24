@@ -4,7 +4,6 @@ const verifyToken = require('../../Middlewares/verify_token')
 const mongoose = require("mongoose");
 
 
-
 const get_all_content = async (req , res) => {
     const querying = req.query
     

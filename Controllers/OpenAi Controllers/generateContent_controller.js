@@ -1,7 +1,5 @@
 require('dotenv').config()
-const mongoose = require("mongoose");
-const scraped_dataBase = require("../../Models/Scraped/scraped_model");
-
+const scrapedBD_operations = require('../Scraped DB Controller/scrapedDB_controller')
 const OpenAI = require('openai');
 require('dotenv').config();
 const axios = require('axios');
@@ -83,31 +81,6 @@ const generateTitleAndArticles = async (articles) => {
     }
 };
 
-
-
-const get_scraped_fromDB = async (brandName, stockName) => {
-    try {
-        if (!mongoose.connection.readyState) {
-            await mongoose.connect(process.env.MONGO_URL, {
-                useNewUrlParser: true,
-                useUnifiedTopology: true,
-            });
-        }
-
-        const query = { brand: brandName };
-        if (stockName) {
-            query.stock = stockName;
-        }
-
-        const results = await scraped_dataBase.find(query);
-
-        return results;
-    } catch (error) {
-        console.error("Error occurred:", error);
-        throw new Error("Internal Server Error");
-    }
-};
-
 const generateContent = async (req, res) => {
     try {
         const brandName = req.body.brandName;
@@ -117,7 +90,7 @@ const generateContent = async (req, res) => {
             return res.status(400).json({ success: false, error: 'No brand Name provided' });
         }
 
-        const scrapeResponse = await get_scraped_fromDB(brandName, stockName);
+        const scrapeResponse = await scrapedBD_operations.getScrapedData(brandName, stockName);
 
         if (!scrapeResponse || scrapeResponse.length === 0) {
             return res.status(404).json({ success: false, error: 'No content found for the given brand and stock' });
@@ -134,5 +107,5 @@ const generateContent = async (req, res) => {
 
 
 module.exports = {
-    generateContent
+    generateContent,
 }

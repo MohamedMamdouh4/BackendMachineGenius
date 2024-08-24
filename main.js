@@ -46,9 +46,11 @@ app.use(cors());
 // import routes file
 const g_routes = require('./Routes/generate_routes')
 const content_routes = require('./Routes/content_routes')
+const scrapedDB_routes = require('./Routes/scrapedDB_routs')
 
 app.use('/',g_routes)
 app.use('/',content_routes)
+app.use('/',scrapedDB_routes)
 
 app.listen(port , async () => {
     try {
